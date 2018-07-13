@@ -17,6 +17,7 @@ namespace FriendOrganizer.DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("wpfmvvm");
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Configurations.Add(new FriendConfiguration()); // if using data annotations (used for validation in UI) => no need for fluent config API
