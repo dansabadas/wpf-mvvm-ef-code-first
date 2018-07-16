@@ -7,7 +7,7 @@ namespace FriendOrganizer.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private IFriendDataService _friendDataService;
+        private readonly IFriendDataService _friendDataService;
         private Friend _selectedFriend;
 
         public MainViewModel(IFriendDataService friendDataService)
@@ -30,7 +30,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         public Friend SelectedFriend
         {
-            get { return _selectedFriend; }
+            get => _selectedFriend;
             set
             {
                 _selectedFriend = value;
