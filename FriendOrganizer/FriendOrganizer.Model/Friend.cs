@@ -4,7 +4,6 @@ namespace FriendOrganizer.Model
 {
     public class Friend
     {
-
         public int Id { get; set; }
 
         [Required]

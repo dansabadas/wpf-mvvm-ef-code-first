@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FriendConfiguration.cs" />
     <Compile Include="FriendOrganizerDbContext.cs" />
     <Compile Include="Migrations\201807131003216_InitialDatabase.cs" />
     <Compile Include="Migrations\201807131003216_InitialDatabase.Designer.cs">

@@ -6,16 +6,43 @@ using Prism.Events;
 
 namespace FriendOrganizer.UI.ViewModel
 {
+    using System.Windows.Input;
+
+    using Prism.Commands;
+
     public class FriendDetailViewModel : ViewModelBase, IFriendDetailViewModel
     {
         private readonly IFriendDataService _dataService;
+        private readonly IEventAggregator _eventAggregator;
 
         public FriendDetailViewModel(IFriendDataService dataService, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
-            eventAggregator
+            _eventAggregator = eventAggregator;
+            _eventAggregator
                 .GetEvent<OpenFriendDetailViewEvent>()
                 .Subscribe(async friendId => await LoadAsync(friendId));
+
+            SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+        }
+
+        private async void OnSaveExecute()
+        {
+            await _dataService.SaveAsync(Friend);
+            _eventAggregator
+                .GetEvent<AfterFriendSavedEvent>()
+                .Publish(
+                    new AfterFriendSavedEventArgs
+                    {
+                        Id = Friend.Id,
+                        DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
+                    });
+        }
+
+        private bool OnSaveCanExecute()
+        {
+            // TODO: Check if friend is valid
+            return true;
         }
 
         private async Task LoadAsync(int friendId)
@@ -34,5 +61,7 @@ namespace FriendOrganizer.UI.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public ICommand SaveCommand { get; }
     }
 }
