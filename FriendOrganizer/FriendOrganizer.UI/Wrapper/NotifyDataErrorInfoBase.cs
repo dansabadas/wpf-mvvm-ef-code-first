@@ -22,7 +22,7 @@ namespace FriendOrganizer.UI.Wrapper
                        : null;
         }
 
-        protected virtual void OnErrorsChanged(string propertyName)
+        private void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             OnPropertyChanged(nameof(HasErrors));

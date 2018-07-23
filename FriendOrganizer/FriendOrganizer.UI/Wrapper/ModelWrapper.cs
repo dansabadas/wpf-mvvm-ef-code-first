@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace FriendOrganizer.UI.Wrapper
 {
-    public class ModelWrapper<T> : NotifyDataErrorInfoBase
+    public abstract class ModelWrapper<T> : NotifyDataErrorInfoBase
     {
         protected ModelWrapper(T model)
         {
@@ -58,9 +58,6 @@ namespace FriendOrganizer.UI.Wrapper
             }
         }
 
-        protected virtual IEnumerable<string> ValidateProperty(string propertyName)
-        {
-            return null;
-        }
+        protected abstract IEnumerable<string> ValidateProperty(string propertyName);
     }
 }
