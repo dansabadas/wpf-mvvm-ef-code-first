@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
+using System.Windows.Input;
+
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
+
+using Prism.Commands;
 using Prism.Events;
 
 namespace FriendOrganizer.UI.ViewModel
 {
-    using System.Windows.Input;
-
-    using Prism.Commands;
-
     public class FriendDetailViewModel : ViewModelBase, IFriendDetailViewModel
     {
         private readonly IFriendDataService _dataService;
