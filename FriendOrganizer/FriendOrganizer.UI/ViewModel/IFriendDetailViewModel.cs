@@ -1,9 +1,9 @@
-﻿using FriendOrganizer.Model;
+﻿using FriendOrganizer.UI.Wrapper;
 
 namespace FriendOrganizer.UI.ViewModel
 {
     public interface IFriendDetailViewModel
     {
-        Friend Friend { get; }
+        FriendWrapper Friend { get; }
     }
 }

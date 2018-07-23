@@ -46,6 +46,7 @@
       <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,6 +85,9 @@
     <Compile Include="View\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wrapper\FriendWrapper.cs" />
+    <Compile Include="Wrapper\ModelWrapper.cs" />
+    <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
