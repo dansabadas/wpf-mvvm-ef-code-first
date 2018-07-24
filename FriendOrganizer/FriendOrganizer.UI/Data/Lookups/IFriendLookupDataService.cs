@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FriendOrganizer.Model;
 
-namespace FriendOrganizer.UI.Data
+namespace FriendOrganizer.UI.Data.Lookups
 {
-    using FriendOrganizer.Model;
-
     public interface IFriendLookupDataService
     {
         Task<IEnumerable<LookupItem>> GetFriendLookupAsync();

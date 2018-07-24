@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
+using FriendOrganizer.UI.Data.Lookups;
 using FriendOrganizer.UI.Event;
 
 using Prism.Events;
@@ -36,7 +37,6 @@ namespace FriendOrganizer.UI.ViewModel
             Friends.Clear();
             foreach (var item in lookup)
             {
-                ////Friends.Add(item);
                 Friends.Add(new NavigationItemViewModel(item.Id, item.DisplayMember));
             }
         }
