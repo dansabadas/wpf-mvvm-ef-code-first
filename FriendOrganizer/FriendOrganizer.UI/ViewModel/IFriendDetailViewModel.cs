@@ -7,7 +7,7 @@ namespace FriendOrganizer.UI.ViewModel
   {
     FriendWrapper Friend { get; }
 
-    Task LoadAsync(int friendId);
+    Task LoadAsync(int? friendId);
 
     bool HasChanges { get; }
   }

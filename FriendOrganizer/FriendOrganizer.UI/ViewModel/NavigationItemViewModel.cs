@@ -8,10 +8,9 @@ namespace FriendOrganizer.UI.ViewModel
   public class NavigationItemViewModel : ViewModelBase
   {
     private string _displayMember;
-    private IEventAggregator _eventAggregator;
+    private readonly IEventAggregator _eventAggregator;
 
-    public NavigationItemViewModel(int id, string displayMember,
-      IEventAggregator eventAggregator)
+    public NavigationItemViewModel(int id, string displayMember, IEventAggregator eventAggregator)
     {
       _eventAggregator = eventAggregator;
       Id = id;

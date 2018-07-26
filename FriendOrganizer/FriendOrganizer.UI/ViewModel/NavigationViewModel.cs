@@ -22,8 +22,15 @@ namespace FriendOrganizer.UI.ViewModel
                 .Subscribe(
                     obj =>
                         {
-                            var lookupItem = Friends.Single(l => l.Id == obj.Id);
-                            lookupItem.DisplayMember = obj.DisplayMember;
+                            var lookupItem = Friends.SingleOrDefault(l => l.Id == obj.Id);
+                            if (lookupItem == null)
+                            {
+                                Friends.Add(new NavigationItemViewModel(obj.Id, obj.DisplayMember, _eventAggregator));
+                            }
+                            else
+                            {
+                                lookupItem.DisplayMember = obj.DisplayMember;
+                            }
                         });
         }
 
