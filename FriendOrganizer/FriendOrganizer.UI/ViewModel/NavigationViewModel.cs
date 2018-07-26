@@ -32,6 +32,7 @@ namespace FriendOrganizer.UI.ViewModel
                                 lookupItem.DisplayMember = obj.DisplayMember;
                             }
                         });
+            _eventAggregator.GetEvent<AfterFriendDeletedEvent>().Subscribe(AfterFriendDeleted);
         }
 
         public async Task LoadAsync()
@@ -45,5 +46,14 @@ namespace FriendOrganizer.UI.ViewModel
         }
 
         public ObservableCollection<NavigationItemViewModel> Friends { get; }
+
+        private void AfterFriendDeleted(int friendId)
+        {
+            var friend = Friends.SingleOrDefault(f => f.Id == friendId);
+            if(friend!=null)
+            {
+                Friends.Remove(friend);
+            }
+        }
     }
 }

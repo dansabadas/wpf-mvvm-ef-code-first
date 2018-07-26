@@ -3,6 +3,7 @@ using System.Windows.Input;
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data.Repositories;
 using FriendOrganizer.UI.Event;
+using FriendOrganizer.UI.View.Services;
 using FriendOrganizer.UI.Wrapper;
 
 using Prism.Commands;
@@ -16,13 +17,31 @@ namespace FriendOrganizer.UI.ViewModel
         private readonly IEventAggregator _eventAggregator;
         private FriendWrapper _friend;
         private bool _hasChanges;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public FriendDetailViewModel(IFriendRepository friendRepository, IEventAggregator eventAggregator)
+        public FriendDetailViewModel(IFriendRepository friendRepository,
+            IEventAggregator eventAggregator,
+            IMessageDialogService messageDialogService)
         {
             _friendRepository = friendRepository;
             _eventAggregator = eventAggregator;
+            _messageDialogService = messageDialogService;
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            DeleteCommand = new DelegateCommand(OnDeleteExecute);
+        }
+
+        public ICommand DeleteCommand { get; set; }
+
+        private async void OnDeleteExecute()
+        {
+            var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the friend {Friend.FirstName} {Friend.LastName}?", "Question");
+            if (result == MessageDialogResult.OK)
+            {
+                _friendRepository.Remove(Friend.Model);
+                await _friendRepository.SaveAsync();
+                _eventAggregator.GetEvent<AfterFriendDeletedEvent>().Publish(Friend.Id);
+            }
         }
 
         private async void OnSaveExecute()
