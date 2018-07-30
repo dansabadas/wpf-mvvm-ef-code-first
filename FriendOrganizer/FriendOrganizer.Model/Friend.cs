@@ -16,5 +16,9 @@ namespace FriendOrganizer.Model
         [StringLength(50)]
         [EmailAddress]
         public string Email { get; set; } 
+
+        public int? FavoriteLanguageId { get; set; }    // will detect this Id property because of the goddamn naming conventions
+
+        public ProgrammingLanguage FavoriteLanguage { get; set; }
     }
 }

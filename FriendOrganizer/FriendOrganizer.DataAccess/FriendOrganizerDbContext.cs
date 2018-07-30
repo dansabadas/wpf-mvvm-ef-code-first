@@ -12,6 +12,8 @@ namespace FriendOrganizer.DataAccess
 
         public DbSet<Friend> Friends { get; set; }
 
+        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -19,10 +21,6 @@ namespace FriendOrganizer.DataAccess
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Configurations.Add(new FriendConfiguration()); // if using data annotations (used for validation in UI) => no need for fluent config API
-            ////modelBuilder.Entity<Friend>()
-            ////    .Property(f => f.FirstName)
-            ////    .IsRequired()
-            ////    .HasMaxLength(50);
         }
     }
 }
