@@ -1,8 +1,9 @@
+using System.Linq;
+using System.Data.Entity.Migrations;
+using FriendOrganizer.Model;
+
 namespace FriendOrganizer.DataAccess.Migrations
 {
-    using FriendOrganizer.Model;
-    using System.Data.Entity.Migrations;
-
     internal sealed class Configuration : DbMigrationsConfiguration<FriendOrganizer.DataAccess.FriendOrganizerDbContext>
     {
         public Configuration()
@@ -29,6 +30,11 @@ namespace FriendOrganizer.DataAccess.Migrations
                 new ProgrammingLanguage { Name = "Swift" },
                 new ProgrammingLanguage { Name = "Java" }
             );
+
+            context.SaveChanges();
+
+            context.FriendPhoneNumbers.AddOrUpdate(pn => pn.Number,
+                new FriendPhoneNumber { Number = "+49 12345678", FriendId = context.Friends.First().Id });  // savechanges ensures the .First exists in the context!
         }
     }
 }
