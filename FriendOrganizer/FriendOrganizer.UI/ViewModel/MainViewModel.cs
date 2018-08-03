@@ -4,26 +4,25 @@ using Prism.Events;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Autofac.Features.Indexed;
 using Prism.Commands;
 
 namespace FriendOrganizer.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IIndex<string, IDetailViewModel> _detailViewModelCreator;
         private readonly IMessageDialogService _messageDialogService;
-        private readonly Func<IFriendDetailViewModel> _friendDetailViewModelCreator;
-        private readonly Func<IMeetingDetailViewModel> _meetingDetailViewModelCreator;
         private IDetailViewModel _detailViewModel;
 
         public MainViewModel(INavigationViewModel navigationViewModel,
-            Func<IFriendDetailViewModel> friendDetailViewModelCreator,
-            Func<IMeetingDetailViewModel> meetingDetailViewModelCreator,
+            IIndex<string, IDetailViewModel> detailViewModelCreator,
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService)
         {
+            _detailViewModelCreator = detailViewModelCreator;
             _messageDialogService = messageDialogService;
-            _friendDetailViewModelCreator = friendDetailViewModelCreator;
-            _meetingDetailViewModelCreator = meetingDetailViewModelCreator;
+
 
             NavigationViewModel = navigationViewModel;
             CreateNewDetailCommand = new DelegateCommand<Type>(viewModelType => OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name }));
@@ -65,18 +64,7 @@ namespace FriendOrganizer.UI.ViewModel
                 }
             }
 
-            switch (args.ViewModelName)
-            {
-                case nameof(FriendDetailViewModel):
-                    DetailViewModel = _friendDetailViewModelCreator();
-                    break;
-                case nameof(MeetingDetailViewModel):
-                    DetailViewModel = _meetingDetailViewModelCreator();
-                    break;
-                default:
-                    throw new Exception("err");
-            }
-
+            DetailViewModel = _detailViewModelCreator[args.ViewModelName];
             await DetailViewModel.LoadAsync(args.Id);
         }
 
