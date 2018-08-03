@@ -29,6 +29,7 @@
         <Menu Grid.ColumnSpan="2" FontSize="20">
             <MenuItem Header="Create">
                 <MenuItem Header="New Friend" Command="{Binding CreateNewDetailCommand}" CommandParameter="{x:Type viewModel:FriendDetailViewModel}" />
+                <MenuItem Header="New Meeting" Command="{Binding CreateNewDetailCommand}" CommandParameter="{x:Type viewModel:MeetingDetailViewModel}" />
             </MenuItem>
         </Menu>
         <view:NavigationView Grid.Row="1"

@@ -4,16 +4,15 @@ using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data.Repositories;
 using FriendOrganizer.UI.View.Services;
 using FriendOrganizer.UI.Wrapper;
-using Prism.Commands;
 using Prism.Events;
 
 namespace FriendOrganizer.UI.ViewModel
 {
     public class MeetingDetailViewModel : DetailViewModelBase, IMeetingDetailViewModel
     {
-        private IMeetingRepository _meetingRepository;
+        private readonly IMeetingRepository _meetingRepository;
+        private readonly IMessageDialogService _messageDialogService;
         private MeetingWrapper _meeting;
-        private IMessageDialogService _messageDialogService;
 
         public MeetingDetailViewModel(IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService,

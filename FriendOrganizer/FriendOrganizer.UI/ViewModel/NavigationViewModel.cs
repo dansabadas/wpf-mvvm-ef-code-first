@@ -79,23 +79,21 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
+            ObservableCollection<NavigationItemViewModel> navigationItemViewModels = null;
             switch (args.ViewModelName)
             {
                 case nameof(FriendDetailViewModel):
-                    AfterDetailDeleted(Friends, args);
+                    navigationItemViewModels = Friends;
                     break;
                 case nameof(MeetingDetailViewModel):
-                    AfterDetailDeleted(Meetings, args);
+                    navigationItemViewModels = Meetings;
                     break;
             }
-        }
 
-        private void AfterDetailDeleted(ObservableCollection<NavigationItemViewModel> items, AfterDetailDeletedEventArgs args)
-        {
-            var friend = items.SingleOrDefault(f => f.Id == args.Id);
-            if (friend != null)
+            var navigationItemViewModel = navigationItemViewModels.SingleOrDefault(f => f.Id == args.Id);
+            if (navigationItemViewModel != null)
             {
-                Friends.Remove(friend);
+                navigationItemViewModels.Remove(navigationItemViewModel);
             }
         }
     }
