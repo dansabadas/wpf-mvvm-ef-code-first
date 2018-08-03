@@ -12,15 +12,19 @@ namespace FriendOrganizer.UI.ViewModel
     {
         private readonly IMessageDialogService _messageDialogService;
         private readonly Func<IFriendDetailViewModel> _friendDetailViewModelCreator;
+        private readonly Func<IMeetingDetailViewModel> _meetingDetailViewModelCreator;
         private IDetailViewModel _detailViewModel;
 
         public MainViewModel(INavigationViewModel navigationViewModel,
             Func<IFriendDetailViewModel> friendDetailViewModelCreator,
+            Func<IMeetingDetailViewModel> meetingDetailViewModelCreator,
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService)
         {
             _messageDialogService = messageDialogService;
             _friendDetailViewModelCreator = friendDetailViewModelCreator;
+            _meetingDetailViewModelCreator = meetingDetailViewModelCreator;
+
             NavigationViewModel = navigationViewModel;
             CreateNewDetailCommand = new DelegateCommand<Type>(viewModelType => OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name }));
 
@@ -66,6 +70,11 @@ namespace FriendOrganizer.UI.ViewModel
                 case nameof(FriendDetailViewModel):
                     DetailViewModel = _friendDetailViewModelCreator();
                     break;
+                case nameof(MeetingDetailViewModel):
+                    DetailViewModel = _meetingDetailViewModelCreator();
+                    break;
+                default:
+                    throw new Exception("err");
             }
 
             await DetailViewModel.LoadAsync(args.Id);
