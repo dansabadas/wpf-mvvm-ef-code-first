@@ -7,7 +7,6 @@ using System.Windows.Input;
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data.Lookups;
 using FriendOrganizer.UI.Data.Repositories;
-using FriendOrganizer.UI.Event;
 using FriendOrganizer.UI.View.Services;
 using FriendOrganizer.UI.Wrapper;
 
@@ -21,7 +20,6 @@ namespace FriendOrganizer.UI.ViewModel
         private readonly IFriendRepository _friendRepository;
         private FriendWrapper _friend;
         private FriendPhoneNumberWrapper _selectedPhoneNumber;
-        private bool _hasChanges;
         private readonly IMessageDialogService _messageDialogService;
         private readonly IProgrammingLanguageLookupDataService _programmingLanguageLookupDataService;
 

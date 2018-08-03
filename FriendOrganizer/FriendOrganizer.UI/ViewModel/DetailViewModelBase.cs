@@ -26,14 +26,14 @@ namespace FriendOrganizer.UI.ViewModel
 
         public bool HasChanges
         {
-            get { return _hasChanges; }
+            get => _hasChanges;
             set
             {
                 if (_hasChanges != value)
                 {
                     _hasChanges = value;
                     OnPropertyChanged();
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                    RaiseCanExecuteChanged(SaveCommand);
                 }
             }
         }

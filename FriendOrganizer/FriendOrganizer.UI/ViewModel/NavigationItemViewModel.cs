@@ -9,7 +9,7 @@ namespace FriendOrganizer.UI.ViewModel
   {
     private string _displayMember;
     private readonly IEventAggregator _eventAggregator;
-    private string _detailViewModelName;
+    private readonly string _detailViewModelName;
 
     public NavigationItemViewModel(int id, string displayMember, string detailViewModelName, IEventAggregator eventAggregator)
     {
