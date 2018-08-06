@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using FriendOrganizer.DataAccess;
 using FriendOrganizer.Model;
@@ -16,6 +18,12 @@ namespace FriendOrganizer.UI.Data.Repositories
             return await _context.Meetings
                 .Include(m => m.Friends)
                 .SingleAsync(m => m.Id == id);
+        }
+
+        public async Task<List<Friend>> GetAllFriendsAsync()
+        {
+            return await _context.Set<Friend>()
+                .ToListAsync();
         }
     }
 }
