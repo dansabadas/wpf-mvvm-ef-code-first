@@ -9,6 +9,7 @@ namespace FriendOrganizer.UI.ViewModel
     public abstract class DetailViewModelBase : ViewModelBase, IDetailViewModel
     {
         private bool _hasChanges;
+        private int _id;
         protected readonly IEventAggregator EventAggregator;
 
         public DetailViewModelBase(IEventAggregator eventAggregator)
@@ -16,6 +17,12 @@ namespace FriendOrganizer.UI.ViewModel
             EventAggregator = eventAggregator;
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
             DeleteCommand = new DelegateCommand(OnDeleteExecute);
+        }
+
+        public int Id
+        {
+            get => _id;
+            protected set => _id = value;
         }
 
         public abstract Task LoadAsync(int? id);
