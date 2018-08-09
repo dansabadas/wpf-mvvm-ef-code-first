@@ -72,12 +72,12 @@ namespace FriendOrganizer.UI.ViewModel
 
         public ProgrammingLanguageWrapper SelectedProgrammingLanguage
         {
-            get { return _selectedProgrammingLanguage; }
+            get => _selectedProgrammingLanguage;
             set
             {
                 _selectedProgrammingLanguage = value;
                 OnPropertyChanged();
-                ((DelegateCommand) RemoveCommand).RaiseCanExecuteChanged();
+                RaiseCanExecuteChanged(RemoveCommand);
             }
         }
 
@@ -91,13 +91,13 @@ namespace FriendOrganizer.UI.ViewModel
             return HasChanges && ProgrammingLanguages.All(p => !p.HasErrors);
         }
 
-        protected async override void OnSaveExecute()
+        protected override async void OnSaveExecute()
         {
             try
             {
                 await _programmingLanguageRepository.SaveAsync();
                 HasChanges = _programmingLanguageRepository.HasChanges();
-                //RaiseCollectionSavedEvent();
+                RaiseCollectionSavedEvent();
             }
             catch (Exception ex)
             {
@@ -125,8 +125,7 @@ namespace FriendOrganizer.UI.ViewModel
         private async void OnRemoveExecute()
         {
             var isReferenced =
-                await _programmingLanguageRepository.IsReferencedByFriendAsync(
-                    SelectedProgrammingLanguage.Id);
+                await _programmingLanguageRepository.IsReferencedByFriendAsync(SelectedProgrammingLanguage.Id);
             if (isReferenced)
             {
                 MessageDialogService.ShowInfoDialog($"The language {SelectedProgrammingLanguage.Name}" +
@@ -139,7 +138,7 @@ namespace FriendOrganizer.UI.ViewModel
             ProgrammingLanguages.Remove(SelectedProgrammingLanguage);
             SelectedProgrammingLanguage = null;
             HasChanges = _programmingLanguageRepository.HasChanges();
-            ((DelegateCommand) SaveCommand).RaiseCanExecuteChanged();
+            RaiseCanExecuteChanged(SaveCommand);
         }
 
         private bool OnRemoveCanExecute()
