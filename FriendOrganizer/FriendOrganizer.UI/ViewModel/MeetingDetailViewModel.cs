@@ -16,7 +16,6 @@ namespace FriendOrganizer.UI.ViewModel
     public class MeetingDetailViewModel : DetailViewModelBase, IMeetingDetailViewModel
     {
         private readonly IMeetingRepository _meetingRepository;
-        private readonly IMessageDialogService _messageDialogService;
         private MeetingWrapper _meeting;
 
         private Friend _selectedAvailableFriend;
@@ -25,10 +24,9 @@ namespace FriendOrganizer.UI.ViewModel
 
         public MeetingDetailViewModel(IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService,
-            IMeetingRepository meetingRepository) : base(eventAggregator)
+            IMeetingRepository meetingRepository) : base(eventAggregator, messageDialogService)
         {
             _meetingRepository = meetingRepository;
-            _messageDialogService = messageDialogService;
 
             AddedFriends = new ObservableCollection<Friend>();
             AvailableFriends = new ObservableCollection<Friend>();
@@ -143,7 +141,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         protected override void OnDeleteExecute()
         {
-            var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the meeting {Meeting.Title}?", "Question");
+            var result = MessageDialogService.ShowOkCancelDialog($"Do you really want to delete the meeting {Meeting.Title}?", "Question");
             if (result == MessageDialogResult.OK)
             {
                 _meetingRepository.Remove(Meeting.Model);
@@ -191,6 +189,11 @@ namespace FriendOrganizer.UI.ViewModel
                 {
                     RaiseCanExecuteChanged(SaveCommand);
                 }
+
+                if (e.PropertyName == nameof(Meeting.Title))
+                {
+                    SetTitle();
+                }
             };
             RaiseCanExecuteChanged(SaveCommand);
 
@@ -199,6 +202,13 @@ namespace FriendOrganizer.UI.ViewModel
                 // Little trick to trigger the validation
                 Meeting.Title = "";
             }
+
+            SetTitle();
+        }
+
+        private void SetTitle()
+        {
+            Title = Meeting.Title;
         }
     }
 }
