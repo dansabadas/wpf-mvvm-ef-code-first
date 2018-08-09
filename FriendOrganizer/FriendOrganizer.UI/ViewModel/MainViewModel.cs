@@ -66,15 +66,24 @@ namespace FriendOrganizer.UI.ViewModel
 
         public ICommand OpenSingleDetailViewCommand { get; }
 
+        private object _syncLock = new object();
         private async void OnOpenDetailView(OpenDetailViewEventArgs args)
         {
-            var detailViewModel = DetailViewModels.SingleOrDefault(vm => vm.Id == args.Id && vm.GetType().Name == args.ViewModelName);
+
+            var detailViewModel =
+                DetailViewModels.SingleOrDefault(vm => vm.Id == args.Id && vm.GetType().Name == args.ViewModelName);
 
             if (detailViewModel == null)
             {
                 detailViewModel = _detailViewModelCreator[args.ViewModelName];
                 await detailViewModel.LoadAsync(args.Id);
-                DetailViewModels.Add(detailViewModel);
+                lock(_syncLock)
+                {
+                    if (!DetailViewModels.Any(vm => vm.Id == args.Id && vm.GetType().Name == args.ViewModelName))
+                    {
+                        DetailViewModels.Add(detailViewModel);
+                    }
+                }
             }
 
             SelectedDetailViewModel = detailViewModel;
