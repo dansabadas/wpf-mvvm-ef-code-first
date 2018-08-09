@@ -1,12 +1,12 @@
-﻿using FriendOrganizer.UI.Event;
+﻿using Autofac.Features.Indexed;
+using FriendOrganizer.UI.Event;
+using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Autofac.Features.Indexed;
-using Prism.Commands;
 
 namespace FriendOrganizer.UI.ViewModel
 {
@@ -24,7 +24,13 @@ namespace FriendOrganizer.UI.ViewModel
             DetailViewModels = new ObservableCollection<IDetailViewModel>();
 
             NavigationViewModel = navigationViewModel;
-            CreateNewDetailCommand = new DelegateCommand<Type>(viewModelType => OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name }));
+
+            int nextNewItemId = 0;
+            CreateNewDetailCommand = new DelegateCommand<Type>(viewModelType => OnOpenDetailView(new OpenDetailViewEventArgs
+            {
+                Id = nextNewItemId--,
+                ViewModelName = viewModelType.Name
+            }));
 
             eventAggregator
                 .GetEvent<OpenDetailViewEvent>()
