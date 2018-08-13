@@ -10,6 +10,8 @@ namespace FriendOrganizer.DataAccess
             Property(f => f.FirstName)
                 .IsRequired()
                 .HasMaxLength(50);
+            Property(f => f.RowVersion)
+                .IsConcurrencyToken();
         }
     }
 }
