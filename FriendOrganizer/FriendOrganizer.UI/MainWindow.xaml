@@ -50,15 +50,23 @@
         <TabControl Grid.Row="1" Grid.Column="1" 
                     ItemsSource="{Binding DetailViewModels}"
                     SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Setter Property="Background" Value="#333333"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Title}"/>
                         <TextBlock Text="*" Visibility="{Binding HasChanges, Converter={StaticResource booleanToVisibilityConverter}}"/>
                         <Button Command="{Binding CloseDetailViewCommand}" 
+                                Style="{StaticResource ChromelessButtonStyle}"
                                 VerticalContentAlignment="Top" 
-                                Margin="2"
-                                Content="x" 
+                                Margin="2 0 2 2"
+                                Content="X" 
                                 FontSize="20"/>
                     </StackPanel>
                 </DataTemplate>
