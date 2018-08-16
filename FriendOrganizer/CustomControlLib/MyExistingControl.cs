@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace CustomControlLib
 {
-    public class MyExistingControl : Control
+    public class MyExistingControl : Button
     {
         static MyExistingControl()
         {
