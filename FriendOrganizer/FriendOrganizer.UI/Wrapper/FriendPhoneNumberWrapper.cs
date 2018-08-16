@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FriendOrganizer.Model;
+﻿using FriendOrganizer.Model;
 
 namespace FriendOrganizer.UI.Wrapper
 {
