@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="MyContentControl.cs" />
     <Compile Include="MyExistingControl.cs" />
+    <Compile Include="MyItemsControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

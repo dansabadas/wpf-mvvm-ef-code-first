@@ -10,8 +10,19 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <cc:MyExistingControl Content="My Control"/>
         <cc:MyContentControl Content="My Control" Grid.Row="1" />
+        <cc:MyContentControl Grid.Row="2">Test Content</cc:MyContentControl>
+        <cc:MyContentControl Grid.Row="3"><Button>My Button</Button></cc:MyContentControl>
+        <cc:MyItemsControl Grid.Row="4">
+            <TextBlock Text="A"></TextBlock> 
+            <TextBlock Text="B"></TextBlock>
+            <TextBlock Text="C"></TextBlock>
+            <TextBlock Text="D"></TextBlock>
+        </cc:MyItemsControl>
     </Grid>
 </Window>
