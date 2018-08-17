@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <cc:MyExistingControl Content="My Control" />
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <cc:MyExistingControl Content="My Control"/>
+        <cc:MyContentControl Content="My Control" Grid.Row="1" />
     </Grid>
 </Window>
