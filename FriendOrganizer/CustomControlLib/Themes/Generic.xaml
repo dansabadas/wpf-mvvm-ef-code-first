@@ -47,4 +47,38 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:MyTextControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyTextControl}">
+
+                    <Border x:Name="bdr" Background="Blue">
+                        <!--<TextBox Background="{Binding Background, ElementName=bdr}"></TextBox> -->
+                        <!--Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" 
+                        Text="{TemplateBinding Text}" => TemplateBinding is the markup extension (and supports only one-way binding for the TemplatedParent below) -->
+                        <TextBox Background="{TemplateBinding Background}"
+                                 Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Border>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:MyControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel>
+                            <TextBlock x:Name="PART_TextBlock" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

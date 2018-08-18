@@ -48,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyContentControl.cs" />
+    <Compile Include="MyControl.cs" />
     <Compile Include="MyExistingControl.cs" />
     <Compile Include="MyItemsControl.cs" />
+    <Compile Include="MyTextControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

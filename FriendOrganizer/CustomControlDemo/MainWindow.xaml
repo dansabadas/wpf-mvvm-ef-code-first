@@ -13,6 +13,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <cc:MyExistingControl Content="My Control"/>
         <cc:MyContentControl Content="My Control" Grid.Row="1" />
@@ -24,5 +26,7 @@
             <TextBlock Text="C"></TextBlock>
             <TextBlock Text="D"></TextBlock>
         </cc:MyItemsControl>
+        <cc:MyTextControl Grid.Row="5" Background="Green" Text="{Binding Name}"></cc:MyTextControl>
+        <cc:MyControl Grid.Row="6" />
     </Grid>
 </Window>
