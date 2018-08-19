@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -40,7 +40,14 @@ namespace CustomControlLib
 
         private static object OnTextPropertyCoerce(DependencyObject d, object baseValue)
         {
-            //your logic here
+            // allows to change the incoming value = baseValue
+            // it only updates the coontrol, not the underlying value
+            // this fires first, before OnTextPropertyChanged
+            if ((string) baseValue == "Dan")
+            {
+                return "Changed " + baseValue;
+            }
+
             return baseValue;
         }
 
@@ -52,7 +59,7 @@ namespace CustomControlLib
 
         protected virtual void OnTextPropertyChanged(string oldValue, string newValue)
         {
-            //property changed logic here
+            Debug.WriteLine($"Debugging {oldValue}->{newValue}");
         }
     }
 }
