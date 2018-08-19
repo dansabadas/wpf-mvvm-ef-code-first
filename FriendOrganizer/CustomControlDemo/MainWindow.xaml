@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition/>
@@ -28,5 +32,6 @@
         </cc:MyItemsControl>
         <cc:MyTextControl Grid.Row="5" Background="Green" Text="{Binding Name}"></cc:MyTextControl>
         <cc:MyControl Grid.Row="6" />
+        <cc:MyCustomControl Text="{Binding Name, Mode=TwoWay}" Text2="{Binding Name}" Grid.Column="1" />
     </Grid>
 </Window>
