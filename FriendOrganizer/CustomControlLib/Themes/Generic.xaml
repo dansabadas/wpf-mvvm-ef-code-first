@@ -95,6 +95,7 @@
                             <Button x:Name="PART_Button" 
                                     Background="{TemplateBinding Background}" 
                                     Content="Click Me" />
+                            <ListBox ItemsSource="{TemplateBinding Items}" />
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>

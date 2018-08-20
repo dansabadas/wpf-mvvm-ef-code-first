@@ -13,6 +13,12 @@ namespace CustomControlDemo
         {
             InitializeComponent();
             DataContext = new DataObject { Name = "Brian Lagunas" };
+
+            DataObject obj1 = new DataObject();
+            DataObject obj2 = new DataObject();
+
+            l1.Items.Add(obj1);
+            l2.Items.Add(obj2);
         }
 
         public class DataObject : INotifyPropertyChanged

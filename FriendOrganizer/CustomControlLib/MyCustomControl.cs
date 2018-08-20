@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +15,7 @@ namespace CustomControlLib
 
         public MyCustomControl()
         {
-
+            Items = new ObservableCollection<object>();
         }
 
         public static readonly DependencyProperty TextProperty =
@@ -84,6 +86,16 @@ namespace CustomControlLib
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SetValue(HasBeenClickedPropertyKey, true);
+        }
+
+        public static readonly DependencyProperty ItemsProperty =
+            // DependencyProperty.Register("Items", typeof(IList), typeof(MyCustomControl), new PropertyMetadata(new ObservableCollection<object>())); // this way, specifying a default value in prop metadata, we inadvertently created a singleton!
+            DependencyProperty.Register("Items", typeof(IList), typeof(MyCustomControl));
+
+        public IList Items
+        {
+            get => (IList)GetValue(ItemsProperty);
+            set => SetValue(ItemsProperty, value);
         }
     }
 }
