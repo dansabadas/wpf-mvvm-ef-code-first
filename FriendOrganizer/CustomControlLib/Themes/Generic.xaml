@@ -92,8 +92,16 @@
                         <StackPanel>
                             <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" />
                             <TextBox Text="{Binding Text2, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Button x:Name="PART_Button" 
+                                    Background="{TemplateBinding Background}" 
+                                    Content="Click Me" />
                         </StackPanel>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasBeenClicked" Value="true">
+                            <Setter Property="Background" Value="Green" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -61,5 +61,29 @@ namespace CustomControlLib
         {
             Debug.WriteLine($"Debugging {oldValue}->{newValue}");
         }
+
+        // below logic for read-only props (RegisterReadOnly)
+        private static readonly DependencyPropertyKey HasBeenClickedPropertyKey =
+            DependencyProperty.RegisterReadOnly("HasBeenClicked", typeof(bool), typeof(MyCustomControl), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty HasBeenClickedProperty = HasBeenClickedPropertyKey.DependencyProperty;
+
+        public bool HasBeenClicked => (bool)GetValue(HasBeenClickedProperty);   // read-only => it has only a getter
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            //demo purposes only, check for previous instances 
+            //and remove handler first
+            if (GetTemplateChild("PART_Button") is Button button)
+                button.Click += Button_Click;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SetValue(HasBeenClickedPropertyKey, true);
+        }
     }
 }
