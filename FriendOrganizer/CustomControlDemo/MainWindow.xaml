@@ -34,5 +34,12 @@
         <cc:MyControl Grid.Row="6" />
         <cc:MyCustomControl x:Name="l1" Text="{Binding Name, Mode=TwoWay}" Text2="{Binding Name}" Grid.Column="1" />
         <cc:MyCustomControl x:Name="l2" Grid.Column="1" Grid.Row="1" />
+        <cc:MyAttachedPropCustomControl Grid.Column="1" Grid.Row="2">
+            <StackPanel x:Name="_stackPanel" cc:MyAttachedPropCustomControl.IncludeChildCount="True">
+                <Button cc:MyAttachedPropCustomControl.IncludeChildCount="True">One</Button>
+                <Button cc:MyAttachedPropCustomControl.IncludeChildCount="False">Two</Button>
+                <Button cc:MyAttachedPropCustomControl.IncludeChildCount="True">Three</Button>
+            </StackPanel>
+        </cc:MyAttachedPropCustomControl>
     </Grid>
 </Window>

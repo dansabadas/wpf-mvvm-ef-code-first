@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using CustomControlLib;
 
 namespace CustomControlDemo
 {
@@ -19,6 +20,11 @@ namespace CustomControlDemo
 
             l1.Items.Add(obj1);
             l2.Items.Add(obj2);
+
+            //two ways of programatically setting the attached property in a control!
+            //MyAttachedPropCustomControl.OnInitialized occurs before this code => the update of attached property won't work here!
+            _stackPanel.SetValue(MyAttachedPropCustomControl.IncludeChildCountProperty, true);
+            MyAttachedPropCustomControl.SetIncludeChildCount(_stackPanel, true);
         }
 
         public class DataObject : INotifyPropertyChanged

@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyAttachedPropCustomControl.cs" />
     <Compile Include="MyContentControl.cs" />
     <Compile Include="MyControl.cs" />
     <Compile Include="MyCustomControl.cs" />
